@@ -1,6 +1,8 @@
 package main
 
 import "fmt"
+import "encoding/binary"
+import "unsafe"
 
 // example represents a type with different fields.
 type example struct {
@@ -36,6 +38,8 @@ func main() {
 
 	// Display the value.
 	fmt.Printf("%+v\n", e1)
+	fmt.Printf("size %v\n", binary.Size(e1))
+	fmt.Printf("unsafe size %v\n", unsafe.Sizeof(e1))
 
 	// Rule 2:
 	// The largest field represents the padding for the entire struct.
