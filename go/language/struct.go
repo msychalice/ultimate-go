@@ -1,14 +1,22 @@
 package main
 
-import "fmt"
-import "encoding/binary"
-import "unsafe"
+import (
+	"fmt"
+	"encoding/binary"
+	"unsafe"
+)
 
 // example represents a type with different fields.
 type example struct {
 	flag    bool
 	counter int16
 	pi      float32
+};
+
+type example1 struct {
+	counter int64
+	pi      float32
+	float   bool
 }
 
 func main() {
@@ -52,6 +60,23 @@ func main() {
 	//     pi      float32
 	//     float   bool
 	// }
+	var ee1 example1
+	fmt.Printf("%+v\n", ee1)
+	fmt.Printf("size %v\n", binary.Size(ee1))
+	fmt.Printf("unsafe size %v\n", unsafe.Sizeof(ee1))
+
+	// The perfect example of not following the Rule 2
+	// See how large the size of the following struct will become
+	eee1 := struct {
+		counter int16
+		pi      float32
+		flag    bool
+	}{
+		counter: 10,
+		pi:      3.141592,
+		flag:    true,
+	}
+	fmt.Println("size ", binary.Size(eee1), "unsafe size", unsafe.Sizeof(eee1))
 
 	// Declare a variable of type example and init using a struct literal.
 	// Every line must end with a comma.
@@ -82,6 +107,7 @@ func main() {
 	fmt.Println("Counter", e3.counter)
 	fmt.Println("Pi", e3.pi)
 
+
 	// ---------------------------
 	// Name type vs anonymous type
 	// ---------------------------
@@ -96,4 +122,5 @@ func main() {
 	e4 = e3
 
 	fmt.Printf("%+v\n", e4)
+	fmt.Println("Flag", e4.flag, "Counter", e4.counter, "Pi", e4.pi)
 }

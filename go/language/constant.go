@@ -67,7 +67,9 @@ func main() {
 
 	// Much larger value than int64 but still compile because of untyped system.
 	// 256 is a lot of space (depending on the architecture)
-	// const bigger = 9223372036854775808543522345
+	const bigger = 9223372036854775808543522345
+	// But get a overflow error when try to print it out
+	// fmt.Println(bigger)
 
 	// Will NOT compile because it exceeds 64 bit
 	// const biggerInt int64 = 9223372036854775808543522345
@@ -110,4 +112,12 @@ func main() {
 	)
 
 	fmt.Println("Log:", Ldate, Ltime, Lmicroseconds, Llongfile, Lshortfile, LUTC)
+
+	// The iota will only increase once for each line
+	const (
+		A4, A5 = iota + 1, iota + 2	// 1, 2
+		B4, B5				// 2, 3
+		C4, C5				// 3, 4
+	)
+	fmt.Println("4:", A4, A5, B4, B5, C4, C5)
 }
