@@ -70,6 +70,16 @@ func (pipe) read(b []byte) (int, error) {
 	return len(s), nil
 }
 
+type channel struct {
+	name string
+}
+
+func (*channel) read(b []byte) (int, error) {
+	s := "channel"
+	copy(b, s)
+	return len(s), nil
+}
+
 func main() {
 	// Create two values one of type file and one of type pipe.
 	f := file{"data.json"}
@@ -129,6 +139,10 @@ func main() {
 	//  -------
 	// |   *   |  --> p copy
 	//  -------
+
+	// With a pointer receiver, it still meets the requirement of implementing the interface.
+	c := channel{"defined channel"}
+	retrieve(&c)
 }
 
 // --------------------

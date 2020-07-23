@@ -79,6 +79,9 @@ func main() {
 	slice2[3] = "Grape"
 	slice2[4] = "Plum"
 
+	// We still can't access an index beyond the length even if the index in less than its capacity.
+	// Error: panic: runtime error: index out of range
+	// fmt.Println(slice2[5])
 	fmt.Printf("\n=> Length vs Capacity\n")
 	inspectSlice(slice2)
 
@@ -181,6 +184,17 @@ func main() {
 	// On the call to append, length and capacity will be different. The addresses are also different.
 	// This is called 3 index slice. This new slice will get its own backing array and we don't
 	// affect anything at all to our original slice.
+
+	slice33 := slice2[2:4:4]
+	inspectSlice(slice33)
+	// syntax of three-index slice
+	// newSlice = oldSlice[i:j:k]
+	// len(newSlice) == j - i
+	// cap(newSlice) == k - i
+	//
+	// the third index of three-index slice can't exceed the capacity of the original slice.
+	// panic: runtime error: slice bounds out of range
+	// slice34 := slice2[2:4:10]
 
 	// ------------
 	// Copy a slice

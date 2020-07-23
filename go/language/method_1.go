@@ -23,6 +23,10 @@ func (u *user) changeEmail(email string) {
 	u.email = email
 }
 
+func (u user) changeName(name string) {
+	u.name = name
+}
+
 // These 2 methods above are just for studying the difference between a value receiver and a
 // pointer receiver. In production, we will have to ask ourself why we choose to use inconsistent
 // receiver's type. We will talk about this later on.
@@ -36,11 +40,15 @@ func main() {
 	bill := user{"Bill", "bill@email.com"}
 	bill.notify()
 	bill.changeEmail("bill@hotmail.com")
+	bill.changeName("Rob")
+	bill.notify()
 
 	// Pointers of type user can also be used to call methods declared with both value and pointer receiver.
 	hoanh := &user{"Hoanh", "hoanhan@email.com"}
 	hoanh.notify()
 	hoanh.changeEmail("hoanhan@bennington.edu")
+	hoanh.changeName("Rob")
+	hoanh.notify()
 
 	// hoanh in this example is a pointer that has the type *user. We are still able to call notify.
 	// This is still correct. As long as we deal with the type user, Go can adjust to make the call.
@@ -66,5 +74,18 @@ func main() {
 	// Iterate over the slice of users switching semantics. This is not a good practice.
 	for _, u := range users {
 		u.changeEmail("it@wontmatter.com")
+	}
+
+	for _, u := range users {
+		u.notify()
+	}
+
+	// Alternative to change the user value in the slice
+	for index, _ := range users {
+		users[index].changeEmail("it@wontmatter.com")
+	}
+
+	for _, u := range users {
+		u.notify()
 	}
 }

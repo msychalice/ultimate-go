@@ -17,4 +17,11 @@ func main() {
 	counter := counters.New(10)
 
 	fmt.Printf("Counter: %d\n", counter)
+
+	// Can't access the unexported type directly
+	// value := counters.user{name: "msy", email: "msy@gmail.com"}
+
+	// But the user type can be using through a factory function
+	value := counters.NewUser("msy", "msy@gmail.com")
+	fmt.Println(value)
 }

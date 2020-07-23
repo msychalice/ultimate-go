@@ -26,6 +26,7 @@ func (u *user) notify() {
 type admin struct {
 	user
 	level string
+	name  string //overwrite the inner type's field
 }
 
 // notify implements a method notifies admins of different events.
@@ -45,6 +46,7 @@ func main() {
 			email: "hoanhan@bennington.edu",
 		},
 		level: "superuser",
+		name:  "admin name",
 	}
 
 	// Send the admin user a notification.

@@ -35,7 +35,7 @@ func main() {
 	var wg sync.WaitGroup
 
 	// We are creating 2 Gorouines.
-	// We rather call Add(1) and call it over and over again to increment by 1. If we don't how
+	// We rather not call Add(1) and call it over and over again to increment by 1. If we don't know how
 	// many Goroutines that we are going to create, that is a smell.
 	wg.Add(2)
 
@@ -79,7 +79,7 @@ func main() {
 // lowercase displays the set of lowercase letters three times.
 func lowercase() {
 	// Display the alphabet three times
-	for count := 0; count < 3; count++ {
+	for count := 0; count < 300000; count++ {
 		for r := 'a'; r <= 'z'; r++ {
 			fmt.Printf("%c ", r)
 		}
@@ -89,7 +89,7 @@ func lowercase() {
 // uppercase displays the set of uppercase letters three times.
 func uppercase() {
 	// Display the alphabet three times
-	for count := 0; count < 3; count++ {
+	for count := 0; count < 300000; count++ {
 		for r := 'A'; r <= 'Z'; r++ {
 			fmt.Printf("%c ", r)
 		}

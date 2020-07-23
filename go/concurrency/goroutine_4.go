@@ -22,6 +22,14 @@ import (
 func init() {
 	// Allocate 2 logical processors for the scheduler to use.
 	runtime.GOMAXPROCS(2)
+	// Don't understand the internal mechanism.
+	// Run this go program on Ubuntu and use top command to check the process.
+	// It turns out that this program uses 5 threads,
+	// which is the same as the goroutine_2.go that allocates only 1 logical processor.
+	// So it raises a question why they use same amount of threads?
+	// Or GOMAXPROCS only sets the maximum number, but in reality it may use less logical processors?
+	// Or multiple logical processors may reside in one thread?
+
 }
 
 func main() {
@@ -35,7 +43,7 @@ func main() {
 	// Declare an anonymous function and create a goroutine.
 	go func() {
 		// Display the alphabet three times.
-		for count := 0; count < 3; count++ {
+		for count := 0; count < 3000000; count++ {
 			for r := 'a'; r <= 'z'; r++ {
 				fmt.Printf("%c ", r)
 			}
@@ -48,7 +56,7 @@ func main() {
 	// Declare an anonymous function and create a goroutine.
 	go func() {
 		// Display the alphabet three times.
-		for count := 0; count < 3; count++ {
+		for count := 0; count < 3000000; count++ {
 			for r := 'A'; r <= 'Z'; r++ {
 				fmt.Printf("%c ", r)
 			}

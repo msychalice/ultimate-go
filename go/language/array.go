@@ -150,7 +150,7 @@ func main() {
 	// Iterate over the array of numbers using traditional style.
 	fmt.Printf("\n=> Iterate over array using traditional style\n")
 	for i := 0; i < len(numbers); i++ {
-		fmt.Println(i, numbers[i])
+		fmt.Println(i, numbers[i], &numbers[i])
 	}
 
 	// ---------------------
@@ -190,6 +190,6 @@ func main() {
 	// v is its own variable on the stack and it has the same address every single time.
 	fmt.Printf("\n=> Contiguous memory allocations\n")
 	for i, v := range six {
-		fmt.Printf("Value[%s]\tAddress[%p] IndexAddr[%p]\n", v, &v, &six[i])
+		fmt.Printf("Value[%T]\tAddress[%p] IndexAddr[%p]\n", v, &v, &six[i])
 	}
 }

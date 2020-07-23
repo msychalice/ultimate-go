@@ -12,6 +12,12 @@ type printer interface {
 	print()
 }
 
+// mutable name
+type mutableName interface {
+	changeNameFail(string)
+	changeNameSuccess(string)
+}
+
 // user defines a user in the program.
 type user struct {
 	name  string
@@ -21,6 +27,16 @@ type user struct {
 // print displays user's name and email.
 func (u user) print() {
 	fmt.Printf("My name is %s and my email is %s\n", u.name, u.email)
+}
+
+// Won't change user's name
+func (u user) changeNameFail(name string) {
+	u.name = name
+}
+
+// Change user's name
+func (u *user) changeNameSuccess(name string) {
+	u.name = name
 }
 
 // ------------------------------
@@ -162,6 +178,15 @@ func main() {
 	for _, e := range entities {
 		e.print()
 	}
+
+	pU := &u
+	// Pass a pointer type variable to an interface with value receiver
+	// and it won't affect the original user object
+	pU.changeNameFail("msy")
+	fmt.Println(&u)
+	// It will change the user object
+	pU.changeNameSuccess("msy")
+	fmt.Println(&u)
 }
 
 // This is our polymorphic function.

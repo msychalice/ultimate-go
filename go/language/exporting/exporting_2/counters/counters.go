@@ -11,6 +11,15 @@ func New(value int) alertCounter {
 	return alertCounter(value)
 }
 
+type user struct {
+	name  string
+	email string
+}
+
+func NewUser(name string, email string) user {
+	return user{name: name, email: email}
+}
+
 // The compiler is okay with this because exporting and unexporting is not about the value like
 // private and public mechanism, it is about the identifier itself.
 // However, we don't do this since there is no encapsulation here. We can just make the type
